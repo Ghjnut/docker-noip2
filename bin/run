@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+[[ "$TRACE" ]] && set -x
+set -eu -o pipefail
+
+source .env
+
+docker run --detach --name "$NOIP_SERVER_CONTAINER" --volumes-from "$NOIP_VOLUME_CONTAINER" --entrypoint /bin/bash "$NOIP_SERVER_IMAGE" -c './noip2 && while true; do ./noip2 -S; sleep 21600; done'

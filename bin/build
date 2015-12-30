@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+[[ "$TRACE" ]] && set -x
+set -eu -o pipefail
+
+source .env
+
+docker build \
+	--tag "$NOIP_SERVER_IMAGE" \
+	.
+
+docker run \
+	--name "$NOIP_VOLUME_CONTAINER" \
+	--volume "$NOIP_CONFIG_DIR" \
+	ubuntu:15.10
