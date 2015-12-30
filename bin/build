@@ -4,11 +4,13 @@ set -eu -o pipefail
 
 source .env
 
+# build main image
 docker build \
 	--tag "$NOIP_SERVER_IMAGE" \
 	.
 
+# create volume-container
 docker run \
-	--name "$NOIP_VOLUME_CONTAINER" \
+	--name "$NOIP_DATA_CONTAINER" \
 	--volume "$NOIP_CONFIG_DIR" \
 	ubuntu:15.10

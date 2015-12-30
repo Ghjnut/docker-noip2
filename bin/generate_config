@@ -4,4 +4,9 @@ set -eu -o pipefail
 
 source .env
 
-docker run --rm --interactive --tty --volumes-from "$NOIP_VOLUME_CONTAINER" "$NOIP_SERVER_IMAGE" -C
+docker run \
+	--rm \
+	--interactive --tty \
+	--volumes-from "$NOIP_DATA_CONTAINER" \
+	"$NOIP_SERVER_IMAGE" \
+	-C
